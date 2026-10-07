@@ -1,0 +1,39 @@
+{
+  "name": "morni",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MORE – Creative Lab · skill-based LMS platform (Std. 1–10)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "db:start": "bash scripts/dev-db.sh start",
+    "db:stop": "bash scripts/dev-db.sh stop",
+    "db:status": "bash scripts/dev-db.sh status",
+    "db:psql": "bash scripts/dev-db.sh psql",
+    "migrate:up": "npm run migrate:up --workspace @morni/api",
+    "migrate:down": "npm run migrate:down --workspace @morni/api",
+    "migrate:redo": "npm run migrate:redo --workspace @morni/api",
+    "seed": "npm run seed --workspace @morni/api",
+    "enums:generate": "npm run enums:generate --workspace @morni/api",
+    "db:reset": "bash scripts/dev-db.sh reset && npm run migrate:up && npm run seed",
+    "test": "npm run test --workspace @morni/api",
+    "dev:api": "npm run dev --workspace @morni/api",
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "npm run dev --workspace @morni/web",
+    "build": "npm run build --workspace @morni/web",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "overrides": {
+    "node-pg-migrate": {
+      "glob": "11.1.0"
+    }
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}
